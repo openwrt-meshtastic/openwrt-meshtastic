@@ -17,8 +17,7 @@ PKG_BUILD_DEPENDS:= \
 	libyaml-cpp \
 	zlib \
 	bluez \
-	openssl \
-	libulfius
+	openssl
 
 PKG_MAINTAINER:=Austin Lane <vidplace7@gmail.com>
 
@@ -31,8 +30,13 @@ define Package/meshtasticd
   CATEGORY:=Meshtastic
   TITLE:=Meshtastic Daemon
   URL:=http://github.com/meshtastic/firmware
-  DEPENDS:=+kmod-spi-dev +libgpiod +libyaml-cpp +zlib +bluez-libs +libopenssl +libulfius-gnutls $(INTL_DEPENDS)
+  DEPENDS:= \
+	+kmod-spi-dev +libgpiod +libyaml-cpp +zlib +bluez-libs \
+	+libopenssl \
+	$(INTL_DEPENDS)
 endef
+
+# +liborcania +libyder +libulfius-yder +libulfius-gnutls
 
 define Package/meshtasticd/description
   Meshtastic Daemon
@@ -69,7 +73,7 @@ define Build/Compile
 	TARGET_RANLIB="$(TARGET_RANLIB)" \
 	PLATFORMIO_BUILD_FLAGS="$(PLATFORMIO_BUILD_FLAGS)" \
 	PLATFORMIO_CACHE_DIR="$(DL_DIR)/.platformio_cache" \
-	PLATFORMIO_BUILD_CACHE_DIR="$(BUILD_DIR)/.platformio_build_cache" \
+	PLATFORMIO_BUILD_CACHE_DIR="$(PKG_BUILD_DIR)/.pio_build_cache" \
 	$(HOST_PYTHON3_BIN) -m platformio run --environment native --project-dir $(PKG_BUILD_DIR)
 endef
 
