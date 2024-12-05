@@ -17,7 +17,8 @@ PKG_BUILD_DEPENDS:= \
 	libyaml-cpp \
 	zlib \
 	bluez \
-	openssl
+	openssl \
+	libulfius
 
 PKG_MAINTAINER:=Austin Lane <vidplace7@gmail.com>
 
@@ -30,7 +31,7 @@ define Package/meshtasticd
   CATEGORY:=Meshtastic
   TITLE:=Meshtastic Daemon
   URL:=http://github.com/meshtastic/firmware
-  DEPENDS:=+libgpiod +libyaml-cpp +zlib +bluez-libs +libopenssl $(INTL_DEPENDS)
+  DEPENDS:=+kmod-spi-dev +libgpiod +libyaml-cpp +zlib +bluez-libs +libopenssl +libulfius-gnutls $(INTL_DEPENDS)
 endef
 
 define Package/meshtasticd/description
