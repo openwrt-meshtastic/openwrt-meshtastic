@@ -1,5 +1,8 @@
-include $(TOPDIR)/rules.mk
+# This is free software, licensed under the GNU General Public License v2.
+# See /LICENSE for more information.
+#
 
+include $(TOPDIR)/rules.mk
 
 PKG_NAME:=python-platformio
 PKG_VERSION:=6.1.16
@@ -36,8 +39,15 @@ define Package/python3-platformio
   CATEGORY:=Meshtastic
   TITLE:=PlatformIO Host Tools
   URL:=https://github.com/platformio/platformio-core
-  DEPENDS:=+python3 +python3-requests
   BUILDONLY:=1
+  DEPENDS:= \
+	+python3-light \
+	+python3-pyserial \
+	+python3-click \
+	+python3-semantic-version \
+	+python3-requests \
+	+python3-tabulate \
+	+python3-pyelftools
 endef
 
 define Package/python3-platformio/description
@@ -46,5 +56,4 @@ endef
 
 $(eval $(call Py3Package,python3-platformio))
 $(eval $(call BuildPackage,python3-platformio))
-# $(eval $(call BuildPackage,python3-platformio-src))
 $(eval $(call HostBuild))

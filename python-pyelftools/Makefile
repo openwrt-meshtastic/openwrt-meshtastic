@@ -1,4 +1,4 @@
-# This is free software, licensed under the GNU General Public License v3.
+# This is free software, licensed under the GNU General Public License v2.
 # See /LICENSE for more information.
 #
 
@@ -33,7 +33,7 @@ define Package/python3-pyelftools
   SUBMENU:=Python
   TITLE:=Library for analyzing ELF files and DWARF debugging information
   URL:=https://pypi.org/project/pyelftools
-  DEPENDS:=+python3
+  DEPENDS:=+python3-light +python3-logging
 endef
 
 define Package/python3-pyelftools/description

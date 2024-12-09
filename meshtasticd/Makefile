@@ -1,13 +1,17 @@
+# This is free software, licensed under the GNU General Public License v2.
+# See /LICENSE for more information.
+#
+
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=meshtasticd
-PKG_VERSION:=2.5.14
+PKG_VERSION:=2.5.15
 PKG_RELEASE:=1
+PKG_SOURCE_VERSION:=v2.5.15.79da236
 
 PKG_BUILD_DIR:=$(BUILD_DIR)/meshtasticd-$(PKG_VERSION)
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=https://github.com/meshtastic/firmware.git
-PKG_SOURCE_VERSION:=v2.5.14.f2ee0df
 PKG_MIRROR_HASH:=skip
 PKG_BUILD_DEPENDS:= \
 	python3/host \
@@ -17,7 +21,10 @@ PKG_BUILD_DEPENDS:= \
 	libyaml-cpp \
 	zlib \
 	bluez \
-	openssl
+	openssl \
+	liborcania \
+	libyder \
+	libulfius
 
 PKG_MAINTAINER:=Austin Lane <vidplace7@gmail.com>
 
@@ -32,11 +39,9 @@ define Package/meshtasticd
   URL:=http://github.com/meshtastic/firmware
   DEPENDS:= \
 	+kmod-spi-dev +libgpiod +libyaml-cpp +zlib +bluez-libs \
-	+libopenssl \
+	+libopenssl +liborcania +libyder +libulfius-gnutls \
 	$(INTL_DEPENDS)
 endef
-
-# +liborcania +libyder +libulfius-yder +libulfius-gnutls
 
 define Package/meshtasticd/description
   Meshtastic Daemon
