@@ -5,9 +5,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=meshtasticd
-PKG_VERSION:=2.5.15
+PKG_VERSION:=2.5.17
 PKG_RELEASE:=1
-PKG_SOURCE_VERSION:=v2.5.15.79da236
+PKG_SOURCE_VERSION:=7dd362950111fbf6ca134b678ec1975d3b6eb1fd
 
 PKG_BUILD_DIR:=$(BUILD_DIR)/meshtasticd-$(PKG_VERSION)
 PKG_SOURCE_PROTO:=git
@@ -17,6 +17,7 @@ PKG_BUILD_DEPENDS:= \
 	python3/host \
 	python-platformio/host \
 	!USE_GLIBC:argp-standalone \
+	libusb \
 	libgpiod \
 	libyaml-cpp \
 	zlib \
@@ -38,7 +39,7 @@ define Package/meshtasticd
   TITLE:=Meshtastic Daemon
   URL:=http://github.com/meshtastic/firmware
   DEPENDS:= \
-	+kmod-spi-dev +libgpiod +libyaml-cpp +zlib +bluez-libs \
+	+kmod-spi-dev +libgpiod +libusb-1.0 +libyaml-cpp +zlib +bluez-libs \
 	+libopenssl +liborcania +libyder +libulfius-gnutls \
 	$(INTL_DEPENDS)
 endef
@@ -48,43 +49,29 @@ define Package/meshtasticd/description
 endef
 
 PLATFORMIO_BUILD_FLAGS = \
-	-std=c++17 \
 	$(if $(INTL_FULL),-lintl) \
 	$(if $(CONFIG_USE_GLIBC),,-largp)
-
-PLATFORMIO_CFLAGS = \
-	$(TARGET_CFLAGS) \
-	-I$(STAGING_DIR)/usr/include
-
-PLATFORMIO_CXXFLAGS = \
-	$(TARGET_CXXFLAGS) \
-	-std=c++17 \
-	-I$(STAGING_DIR)/usr/include
-
-PLATFORMIO_LDFLAGS = \
-	$(TARGET_LDFLAGS) \
-	-L$(STAGING_DIR)/usr/lib
 
 define Build/Compile
 	TARGET_AR="$(TARGET_AR)" \
 	TARGET_AS="$(TARGET_CC) -c $(TARGET_ASFLAGS)" \
 	TARGET_CC="$(TARGET_CC)" \
 	TARGET_CXX="$(TARGET_CXX)" \
-	TARGET_LDFLAGS="$(PLATFORMIO_LDFLAGS)" \
-	TARGET_CFLAGS="$(PLATFORMIO_CFLAGS)" \
-	TARGET_CXXFLAGS="$(PLATFORMIO_CXXFLAGS)" \
+	TARGET_LDFLAGS="$(TARGET_LDFLAGS)" \
+	TARGET_CFLAGS="$(TARGET_CFLAGS)" \
+	TARGET_CXXFLAGS="$(TARGET_CXXFLAGS)" \
 	TARGET_LD="$(TARGET_LD)" \
 	TARGET_OBJCOPY="$(TARGET_CROSS)objcopy" \
 	TARGET_RANLIB="$(TARGET_RANLIB)" \
 	PLATFORMIO_BUILD_FLAGS="$(PLATFORMIO_BUILD_FLAGS)" \
 	PLATFORMIO_CACHE_DIR="$(DL_DIR)/.platformio_cache" \
 	PLATFORMIO_BUILD_CACHE_DIR="$(PKG_BUILD_DIR)/.pio_build_cache" \
-	$(HOST_PYTHON3_BIN) -m platformio run --environment native --project-dir $(PKG_BUILD_DIR)
+	$(HOST_PYTHON3_BIN) -m platformio run --environment buildroot --project-dir $(PKG_BUILD_DIR)
 endef
 
 define Package/meshtasticd/install
 	$(INSTALL_DIR) $(1)/usr/sbin
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/.pio/build/native/program $(1)/usr/sbin/meshtasticd
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/.pio/build/buildroot/program $(1)/usr/sbin/meshtasticd
 endef
 
 $(eval $(call BuildPackage,meshtasticd))
