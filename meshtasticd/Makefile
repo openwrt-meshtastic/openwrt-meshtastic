@@ -2,6 +2,9 @@
 # See /LICENSE for more information.
 #
 
+# TODO: 
+# - Add init.d script
+
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=meshtasticd
@@ -9,7 +12,7 @@ PKG_VERSION:=2.5.17
 PKG_RELEASE:=1
 PKG_SOURCE_VERSION:=7dd362950111fbf6ca134b678ec1975d3b6eb1fd
 
-PKG_BUILD_DIR:=$(BUILD_DIR)/meshtasticd-$(PKG_VERSION)
+PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=https://github.com/meshtastic/firmware.git
 PKG_MIRROR_HASH:=skip
@@ -17,35 +20,72 @@ PKG_BUILD_DEPENDS:= \
 	python3/host \
 	python-platformio/host \
 	!USE_GLIBC:argp-standalone \
-	libusb \
 	libgpiod \
 	libyaml-cpp \
 	zlib \
 	bluez \
 	openssl \
-	liborcania \
-	libyder \
-	libulfius
+	MESHTASTICD_ENABLE_USB:libusb \
+	MESHTASTICD_ENABLE_WEB:liborcania \
+	MESHTASTICD_ENABLE_WEB:libyder \
+	MESHTASTICD_ENABLE_WEB:libulfius
 
 PKG_MAINTAINER:=Austin Lane <vidplace7@gmail.com>
+PKG_LICENSE:=GPL-3.0
+PKG_LICENSE_FILES:=LICENSE
 
 include $(INCLUDE_DIR)/package.mk
 include $(TOPDIR)/feeds/packages/lang/python/python3-host.mk
 include $(INCLUDE_DIR)/nls.mk
 
-define Package/meshtasticd
-  SECTION:=meshtastic
-  CATEGORY:=Meshtastic
+define Package/meshtasticd/Default
+  SECTION:=net
+  CATEGORY:=Network
   TITLE:=Meshtastic Daemon
   URL:=http://github.com/meshtastic/firmware
   DEPENDS:= \
-	+kmod-spi-dev +libgpiod +libusb-1.0 +libyaml-cpp +zlib +bluez-libs \
-	+libopenssl +liborcania +libyder +libulfius-gnutls \
+	+libgpiod +libyaml-cpp +zlib +bluez-libs +libopenssl \
+	+MESHTASTICD_ENABLE_SPI:kmod-spi-dev +MESHTASTICD_ENABLE_USB:libusb-1.0 \
+	+MESHTASTICD_ENABLE_WEB:liborcania +MESHTASTICD_ENABLE_WEB:libyder +MESHTASTICD_ENABLE_WEB:libulfius-gnutls \
 	$(INTL_DEPENDS)
+endef
+
+Package/meshtasticd = $(Package/meshtasticd/Default)
+
+define Package/meshtasticd-avahi-service
+  $(call Package/meshtasticd/Default)
+  TITLE+= (avahi service)
+  DEPENDS:=meshtasticd +avahi-daemon
 endef
 
 define Package/meshtasticd/description
   Meshtastic Daemon
+endef
+
+define Package/meshtasticd-avahi-service/description
+This package contains the service definition for announcing the
+meshtastic daemon via mDNS.
+endef
+
+define Package/meshtasticd/config
+config MESHTASTICD_ENABLE_SPI
+	bool "spi lora radio support"
+	default y
+	help
+	  SPI LoRa radio support for meshtasticd
+
+config MESHTASTICD_ENABLE_USB
+	bool "usb lora radio support"
+	default y
+	help
+	  USB LoRa radio support for meshtasticd
+
+config MESHTASTICD_ENABLE_WEB
+	bool "webui support"
+	select PACKAGE_meshtasticd-web
+	default y
+	help
+	  Adds support for the meshtasticd webui
 endef
 
 PLATFORMIO_BUILD_FLAGS = \
@@ -70,8 +110,28 @@ define Build/Compile
 endef
 
 define Package/meshtasticd/install
+	$(INSTALL_DIR) $(1)/etc/meshtasticd
+	$(INSTALL_CONF) $(PKG_BUILD_DIR)/bin/config-dist.yaml $(1)/etc/meshtasticd/config.yaml
+	$(INSTALL_DIR) $(1)/etc/meshtasticd/config.d
+	$(INSTALL_DIR) $(1)/etc/meshtasticd/available.d
+	$(CP) -R $(PKG_BUILD_DIR)/bin/config.d/* $(1)/etc/meshtasticd/available.d
+
 	$(INSTALL_DIR) $(1)/usr/sbin
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/.pio/build/buildroot/program $(1)/usr/sbin/meshtasticd
 endef
 
+define Package/meshtasticd-avahi-service/install
+	$(INSTALL_DIR) $(1)/etc/avahi/services
+	$(INSTALL_DATA) ./files/meshtasticd.service $(1)/etc/avahi/services/
+endef
+
+define Package/meshtasticd/conffiles
+/etc/meshtasticd/config.yaml
+endef
+
+define Package/meshtasticd-avahi-service/conffiles
+/etc/avahi/services/meshtasticd.service
+endef
+
 $(eval $(call BuildPackage,meshtasticd))
+$(eval $(call BuildPackage,meshtasticd-avahi-service))
