@@ -2,9 +2,6 @@
 # See /LICENSE for more information.
 #
 
-# TODO: 
-# - Add init.d script
-
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=meshtasticd
@@ -110,14 +107,17 @@ define Build/Compile
 endef
 
 define Package/meshtasticd/install
+	$(INSTALL_DIR) $(1)/usr/sbin
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/.pio/build/buildroot/program $(1)/usr/sbin/meshtasticd
+
 	$(INSTALL_DIR) $(1)/etc/meshtasticd
 	$(INSTALL_CONF) $(PKG_BUILD_DIR)/bin/config-dist.yaml $(1)/etc/meshtasticd/config.yaml
 	$(INSTALL_DIR) $(1)/etc/meshtasticd/config.d
 	$(INSTALL_DIR) $(1)/etc/meshtasticd/available.d
 	$(CP) -R $(PKG_BUILD_DIR)/bin/config.d/* $(1)/etc/meshtasticd/available.d
 
-	$(INSTALL_DIR) $(1)/usr/sbin
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/.pio/build/buildroot/program $(1)/usr/sbin/meshtasticd
+	$(INSTALL_DIR) $(1)/etc/init.d
+	$(INSTALL_BIN) ./files/meshtasticd.init $(1)/etc/init.d/meshtasticd
 endef
 
 define Package/meshtasticd-avahi-service/install
