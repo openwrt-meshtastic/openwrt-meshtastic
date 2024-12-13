@@ -66,7 +66,7 @@ For the most up to date status see [vidplace7's `openwrt/packages` PRs](https://
 | **python-meshtastic** | 🕰️       |
 | python-pexpect        |          |                 |                 | Unused?
 | python-print-color    | 📑       |                 |                 | Optional
-| python-protobuf       | 📑       |
-| python-pypubsub       | 📑       |
+| python-protobuf       | 📑 🏃    |
+| python-pypubsub       | 📑 🏃    |
 | python-pyqrcode       | 📑       |                 |                 | Optional
 | python-webencodings   |          |                 |                 | Unused?
