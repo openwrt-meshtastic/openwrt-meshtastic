@@ -13,7 +13,10 @@ For the most up to date status see [vidplace7's `openwrt/packages` PRs](https://
 
 📑 To-do (need to submit)
 
-## New Packages
+
+## `meshtasticd`
+
+### New Packages
 | Package             | `master`        | `openwrt-24.10` | `openwrt-23.05` | Notes
 | :------------------ | :-------------: | :-------------: | :-------------: | :----
 | libyder             | [📥 🕰️][#25503] |                 |                 | Awaiting liborcania modification
@@ -21,14 +24,14 @@ For the most up to date status see [vidplace7's `openwrt/packages` PRs](https://
 | **meshtasticd-web** | 🕰️              |                 |                 |
 | python-platformio   | [📥 🕰️][#25528] |                 |                 | Awaiting python-[tabulate,pyelftools,click,pyserial,~~requests~~] hostbuild modifications
 | python-pyelftools   | [📥][#25502]    |                 |                 |
-| python-tabulate     | [📥][#25501]    |                 |                 |
+| python-tabulate     | [📥][#25501]    |                 |                 | Also used in `python-meshtastic`
 
 [#25503]: https://github.com/openwrt/packages/pull/25503
 [#25528]: https://github.com/openwrt/packages/pull/25528
 [#25502]: https://github.com/openwrt/packages/pull/25502
 [#25501]: https://github.com/openwrt/packages/pull/25501
 
-## Modified Packages
+### Modified Packages
 | Package         | `master`        | `openwrt-24.10` | `openwrt-23.05` | Notes
 | :-------------- | :-------------: | :-------------: | :-------------: | :----
 | liborcania      | [📥][#25526]    |                 |                 | Install library on target
@@ -52,3 +55,18 @@ For the most up to date status see [vidplace7's `openwrt/packages` PRs](https://
 [#25495]: https://github.com/openwrt/packages/pull/25495
 
 [#25542]: https://github.com/openwrt/packages/pull/25542
+
+
+## `python-meshtastic`
+
+### New Packages
+| Package               | `master`        | `openwrt-24.10` | `openwrt-23.05` | Notes
+| :-------------------- | :-------------: | :-------------: | :-------------: | :----
+| python-dotmap         | 📑
+| **python-meshtastic** | 🕰️
+| python-pexpect        | 📑
+| python-print-color    | 📑
+| python-protobuf       | 📑
+| python-pypubsub       | 📑
+| python-pyqrcode       | 📑
+| python-webencodings   | 📑

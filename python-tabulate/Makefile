@@ -20,7 +20,7 @@ HOST_BUILD_DEPENDS:= \
 	python3/host \
 	python-build/host \
 	python-installer/host \
-  python-wheel/host \
+	python-wheel/host \
 	python-setuptools-scm/host
 
 include $(TOPDIR)/feeds/packages/lang/python/pypi.mk
