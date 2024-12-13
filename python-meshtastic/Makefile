@@ -29,8 +29,9 @@ define Package/python3-meshtastic
   URL:=https://pypi.org/project/meshtastic
   DEPENDS:= \
 	+python3-light +python3-asyncio +python3-decimal +python3-logging \
-	+python3-pyserial +python3-requests +python3-pyparsing +python3-yaml +python3-bleak \
-	+python3-tabulate +python3-protobuf +python3-dotmap +python3-pexpect +python3-pyqrcode +python3-webencodings +python3-pypubsub +python3-print-color
+	+python3-pyserial +python3-requests +python3-yaml +python3-bleak \
+	+python3-tabulate +python3-protobuf +python3-pypubsub \
+	+python3-dotmap +python3-pyqrcode +python3-print-color
 endef
 
 define Package/python3-meshtastic/description
