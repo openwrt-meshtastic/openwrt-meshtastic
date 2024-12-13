@@ -9,6 +9,7 @@ PKG_VERSION:=4.0.3
 PKG_RELEASE:=1
 
 PYTHON3_PKG_WHEEL_NAME:=Pypubsub
+
 PKG_SOURCE:=pypubsub-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/schollii/pypubsub/tar.gz/v$(PKG_VERSION)?
 PKG_HASH:=0df83daa1cb0021bab858ff6812d836c9712dea59a5172be1888bb554c3a89a2
