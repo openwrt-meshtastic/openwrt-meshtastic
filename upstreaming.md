@@ -60,13 +60,13 @@ For the most up to date status see [vidplace7's `openwrt/packages` PRs](https://
 ## `python-meshtastic`
 
 ### New Packages
-| Package               | `master`        | `openwrt-24.10` | `openwrt-23.05` | Notes
-| :-------------------- | :-------------: | :-------------: | :-------------: | :----
-| python-dotmap         | 📑
-| **python-meshtastic** | 🕰️
-| python-pexpect        | 📑
-| python-print-color    | 📑
-| python-protobuf       | 📑
-| python-pypubsub       | 📑
-| python-pyqrcode       | 📑
-| python-webencodings   | 📑
+| Package               | `master` | `openwrt-24.10` | `openwrt-23.05` | Notes
+| :-------------------- | :------: | :-------------: | :-------------: | :----
+| python-dotmap         | 📑       |                 |                 | Optional
+| **python-meshtastic** | 🕰️       |
+| python-pexpect        |          |                 |                 | Unused?
+| python-print-color    | 📑       |                 |                 | Optional
+| python-protobuf       | 📑       |
+| python-pypubsub       | 📑       |
+| python-pyqrcode       | 📑       |                 |                 | Optional
+| python-webencodings   |          |                 |                 | Unused?
