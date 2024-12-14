@@ -1,3 +1,5 @@
+# Remove when https://github.com/openwrt/packages/pull/25503 is merged.
+
 #
 # This is free software, licensed under the GNU General Public License v2.
 # See /LICENSE for more information.
@@ -29,7 +31,6 @@ define Package/libyder
   TITLE:=Logging library written in C.
   URL:=https://github.com/babelouest/yder
   DEPENDS:=+liborcania
-  PROVIDES:=libyder
 endef
 
 CMAKE_OPTIONS += \

@@ -51,7 +51,9 @@ define Package/python3-platformio
 endef
 
 define Package/python3-platformio/description
-PlatformIO IDE
+PlatformIO is an open-source build system for embedded development,
+supporting multiple platforms, frameworks, and boards
+with features like dependency management and IDE integration.
 endef
 
 $(eval $(call Py3Package,python3-platformio))
