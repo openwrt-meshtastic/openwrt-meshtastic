@@ -21,8 +21,8 @@ PKG_BUILD_DEPENDS:= \
 	libyaml-cpp \
 	zlib \
 	bluez \
-	openssl \
 	MESHTASTICD_ENABLE_USB:libusb \
+	MESHTASTICD_ENABLE_WEB:openssl \
 	MESHTASTICD_ENABLE_WEB:liborcania \
 	MESHTASTICD_ENABLE_WEB:libyder \
 	MESHTASTICD_ENABLE_WEB:libulfius
@@ -41,8 +41,9 @@ define Package/meshtasticd/Default
   TITLE:=Meshtastic Daemon
   URL:=http://github.com/meshtastic/firmware
   DEPENDS:= \
-	+libgpiod +libyaml-cpp +zlib +bluez-libs +libopenssl \
+	+libgpiod +libyaml-cpp +zlib +bluez-libs \
 	+MESHTASTICD_ENABLE_SPI:kmod-spi-dev +MESHTASTICD_ENABLE_USB:libusb-1.0 \
+	+MESHTASTICD_ENABLE_WEB:libopenssl \
 	+MESHTASTICD_ENABLE_WEB:liborcania +MESHTASTICD_ENABLE_WEB:libyder +MESHTASTICD_ENABLE_WEB:libulfius-gnutls \
 	$(INTL_DEPENDS)
 endef
@@ -87,7 +88,9 @@ endef
 
 PLATFORMIO_BUILD_FLAGS = \
 	$(if $(INTL_FULL),-lintl) \
-	$(if $(CONFIG_USE_GLIBC),,-largp)
+	$(if $(CONFIG_USE_GLIBC),,-largp) \
+	$(if $(MESHTASTICD_ENABLE_WEB),-lssl -lcrypto) \
+	$(if $(MESHTASTICD_ENABLE_WEB),-lorcania -lyder -lulfius)
 
 define Build/Compile
 	TARGET_AR="$(TARGET_AR)" \
