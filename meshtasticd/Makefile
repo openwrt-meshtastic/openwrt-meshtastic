@@ -6,8 +6,8 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=meshtasticd
 PKG_VERSION:=2.5.17
-PKG_RELEASE:=3
-PKG_SOURCE_VERSION:=6d8be13266c9e07caa42dc7a3420a9424c1aca89
+PKG_RELEASE:=4
+PKG_SOURCE_VERSION:=69d01a8088d89753cea18502e44777764774d765
 
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)
 PKG_SOURCE_PROTO:=git
@@ -87,6 +87,7 @@ config MESHTASTICD_ENABLE_WEB
 endef
 
 PLATFORMIO_BUILD_FLAGS = \
+	-Os -ffunction-sections -fdata-sections -Wl,--gc-sections \
 	$(if $(INTL_FULL),-lintl) \
 	$(if $(CONFIG_USE_GLIBC),,-largp) \
 	$(if $(CONFIG_MESHTASTICD_ENABLE_WEB),-lssl -lcrypto) \
