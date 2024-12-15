@@ -6,8 +6,8 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=meshtasticd
 PKG_VERSION:=2.5.17
-PKG_RELEASE:=2
-PKG_SOURCE_VERSION:=44cf6d388ebd9d284e490c150cc568f3199fba0f
+PKG_RELEASE:=3
+PKG_SOURCE_VERSION:=6d8be13266c9e07caa42dc7a3420a9424c1aca89
 
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)
 PKG_SOURCE_PROTO:=git
@@ -89,8 +89,8 @@ endef
 PLATFORMIO_BUILD_FLAGS = \
 	$(if $(INTL_FULL),-lintl) \
 	$(if $(CONFIG_USE_GLIBC),,-largp) \
-	$(if $(MESHTASTICD_ENABLE_WEB),-lssl -lcrypto) \
-	$(if $(MESHTASTICD_ENABLE_WEB),-lorcania -lyder -lulfius)
+	$(if $(CONFIG_MESHTASTICD_ENABLE_WEB),-lssl -lcrypto) \
+	$(if $(CONFIG_MESHTASTICD_ENABLE_WEB),-lorcania -lyder -lulfius)
 
 define Build/Compile
 	TARGET_AR="$(TARGET_AR)" \
