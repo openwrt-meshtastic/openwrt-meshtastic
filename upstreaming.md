@@ -4,6 +4,8 @@ Status of efforts to upstream `meshtasticd` and it's dependencies into [`openwrt
 
 For the most up to date status see [vidplace7's `openwrt/packages` PRs](https://github.com/openwrt/packages/pulls?q=author%3Avidplace7).
 
+We plan to target `master`, `openwrt-24.10` and (later) `openwrt-23.05` for LibreMesh / AREDN compatibility.
+
 #### Legend
 📥 PR Submitted
 
@@ -60,11 +62,20 @@ For the most up to date status see [vidplace7's `openwrt/packages` PRs](https://
 ## `python-meshtastic`
 
 ### New Packages
-| Package               | `master` | `openwrt-24.10` | `openwrt-23.05` | Notes
-| :-------------------- | :------: | :-------------: | :-------------: | :----
-| python-dotmap         | 📑       |                 |                 | Optional
-| **python-meshtastic** | 🕰️       |
-| python-print-color    | 📑       |                 |                 | Optional
-| python-protobuf       | 📑 🏃    |
-| python-pypubsub       | 📑 🏃    |
-| python-pyqrcode       | 📑       |                 |                 | Optional
+| Package               | `master`     | `openwrt-24.10` | `openwrt-23.05` | Notes
+| :-------------------- | :----------: | :-------------: | :-------------: | :----
+| abseil-cpp            | [📥][#25565] |                 |                 | Dep for *updating* `protobuf`
+| python-dotmap         | 📑           |                 |                 | Optional
+| **python-meshtastic** | 🕰️           |
+| python-print-color    | 📑           |                 |                 | Optional
+| python-pypubsub       | 📑 🏃        |
+| python-pyqrcode       | 📑           |                 |                 | Optional
+
+[#25565]: https://github.com/openwrt/packages/pull/25565
+
+### Modified Packages
+| Package  | `master`        | `openwrt-24.10` | `openwrt-23.05` | Notes
+| :------- | :-------------: | :-------------: | :-------------: | :----
+| protobuf | [📥 🕰️][#25566] |                 |                 | Update + add Python bindings, depends on `abseil-cpp`
+
+[#25566]: https://github.com/openwrt/packages/pull/25566
