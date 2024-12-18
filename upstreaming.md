@@ -1,6 +1,6 @@
 # Upstreaming Status
 
-Status of efforts to upstream `meshtasticd` and it's dependencies into [`openwrt/packages`](https://github.com/openwrt/packages).
+Status of efforts to upstream `meshtasticd`, `python-meshtastic`, and their dependencies into [`openwrt/packages`](https://github.com/openwrt/packages).
 
 For the most up to date status see [vidplace7's `openwrt/packages` PRs](https://github.com/openwrt/packages/pulls?q=author%3Avidplace7).
 
@@ -19,14 +19,14 @@ We plan to target `master`, `openwrt-24.10` and (later) `openwrt-23.05` for Libr
 ## `meshtasticd`
 
 ### New Packages
-| Package             | `master`        | `openwrt-24.10` | `openwrt-23.05` | Notes
-| :------------------ | :-------------: | :-------------: | :-------------: | :----
-| libyder             | [📥 🕰️][#25503] |                 |                 | Awaiting liborcania modification
-| **meshtasticd**     | 🕰️              |                 |                 | Awaiting python-platformio
-| **meshtasticd-web** | 🕰️              |                 |                 |
-| python-platformio   | [📥 🕰️][#25528] |                 |                 | Awaiting python-[click,tabulate,~~pyelftools~~,~~pyserial~~,~~requests~~] hostbuild modifications
-| python-pyelftools   | [✅][#25502]    |                 |                 |
-| python-tabulate     | [📥][#25501]    |                 |                 | Also used in `python-meshtastic`
+| Package             | `master`     | `openwrt-24.10` | `openwrt-23.05` | Notes
+| :------------------ | :----------: | :-------------: | :-------------: | :----
+| libyder             | [📥][#25503] |                 |                 |
+| **meshtasticd**     | 🕰️           |                 |                 | Awaiting python-platformio
+| **meshtasticd-web** | 🕰️           |                 |                 |
+| python-platformio   | [📥][#25528] |                 |                 |
+| python-pyelftools   | [✅][#25502] |                 |                 |
+| python-tabulate     | [✅][#25501] |                 |                 | Also used in `python-meshtastic`
 
 [#25503]: https://github.com/openwrt/packages/pull/25503
 [#25528]: https://github.com/openwrt/packages/pull/25528
@@ -34,17 +34,17 @@ We plan to target `master`, `openwrt-24.10` and (later) `openwrt-23.05` for Libr
 [#25501]: https://github.com/openwrt/packages/pull/25501
 
 ### Modified Packages
-| Package         | `master`        | `openwrt-24.10` | `openwrt-23.05` | Notes
-| :-------------- | :-------------: | :-------------: | :-------------: | :----
-| liborcania      | [✅][#25526]    | 📑              |                 | Install library on target
-| libulfius       | [📥][#25527]    |                 |                 | Install library on target
-| python-certifi  | [✅][#25497]    | [📥][#25542]    |                 | Add hostbuild
-| python-chardet  | [✅][#25496]    | [📥][#25542]    |                 | Add hostbuild
-| python-click    | [📥][#25492]    |                 |                 | Add hostbuild
-| python-idna     | [✅][#25498]    | [📥][#25542]    |                 | Add hostbuild
-| python-pyserial | [✅][#25494]    | 📑              |                 | Add hostbuild
-| python-requests | [✅][#25499]    | [📥][#25542]    |                 | Add hostbuild
-| python-urllib3  | [✅][#25495]    | [📥][#25542]    |                 | Add hostbuild
+| Package         | `master`     | `openwrt-24.10` | `openwrt-23.05` | Notes
+| :-------------- | :----------: | :-------------: | :-------------: | :----
+| liborcania      | [✅][#25526] | 📑              |                 | Install library on target
+| libulfius       | [✅][#25527] | 📑              |                 | Install library on target
+| python-certifi  | [✅][#25497] | [📥][#25542]    |                 | Add hostbuild
+| python-chardet  | [✅][#25496] | [📥][#25542]    |                 | Add hostbuild
+| python-click    | [✅][#25492] | 📑              |                 | Add hostbuild
+| python-idna     | [✅][#25498] | [📥][#25542]    |                 | Add hostbuild
+| python-pyserial | [✅][#25494] | 📑              |                 | Add hostbuild
+| python-requests | [✅][#25499] | [📥][#25542]    |                 | Add hostbuild
+| python-urllib3  | [✅][#25495] | [📥][#25542]    |                 | Add hostbuild
 
 [#25526]: https://github.com/openwrt/packages/pull/25526
 [#25527]: https://github.com/openwrt/packages/pull/25527
@@ -64,19 +64,20 @@ We plan to target `master`, `openwrt-24.10` and (later) `openwrt-23.05` for Libr
 ### New Packages
 | Package               | `master`     | `openwrt-24.10` | `openwrt-23.05` | Notes
 | :-------------------- | :----------: | :-------------: | :-------------: | :----
-| abseil-cpp            | [📥][#25565] |                 |                 | Dep for *updating* `protobuf`
+| abseil-cpp            | [✅][#25565] | 📑 🕰️           |                 | Dep for *updating* `protobuf`
 | python-dotmap         | 📑           |                 |                 | Optional
 | **python-meshtastic** | 🕰️           |
 | python-print-color    | 📑           |                 |                 | Optional
 | python-protobuf       | 📑 🕰️        |                 |                 | Awaiting `protobuf` update.
-| python-pypubsub       | 📑 🏃        |
+| python-pypubsub       | [📥][#25576] |
 | python-pyqrcode       | 📑           |                 |                 | Optional
 
 [#25565]: https://github.com/openwrt/packages/pull/25565
+[#25576]: https://github.com/openwrt/packages/pull/25576
 
 ### Modified Packages
-| Package  | `master`        | `openwrt-24.10` | `openwrt-23.05` | Notes
-| :------- | :-------------: | :-------------: | :-------------: | :----
-| protobuf | [📥 🕰️][#25566] |                 |                 | Depends on `abseil-cpp`
+| Package  | `master`     | `openwrt-24.10` | `openwrt-23.05` | Notes
+| :------- | :----------: | :-------------: | :-------------: | :----
+| protobuf | [📥][#25566] |                 |                 | Depends on `abseil-cpp`
 
 [#25566]: https://github.com/openwrt/packages/pull/25566
