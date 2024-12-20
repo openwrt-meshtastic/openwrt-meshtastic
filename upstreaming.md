@@ -69,7 +69,7 @@ We plan to target `master`, `openwrt-24.10` and (later) `openwrt-23.05` for Libr
 | **python-meshtastic** | 🕰️           |
 | python-print-color    | 📑           |                 |                 | Optional
 | python-protobuf       | 📑 🕰️        |                 |                 | Awaiting `protobuf` update.
-| python-pypubsub       | [📥][#25576] |
+| python-pypubsub       | [✅][#25576] | 📑              |                 |
 | python-pyqrcode       | 📑           |                 |                 | Optional
 
 [#25565]: https://github.com/openwrt/packages/pull/25565
@@ -78,6 +78,8 @@ We plan to target `master`, `openwrt-24.10` and (later) `openwrt-23.05` for Libr
 ### Modified Packages
 | Package  | `master`     | `openwrt-24.10` | `openwrt-23.05` | Notes
 | :------- | :----------: | :-------------: | :-------------: | :----
+| node     | [📥][#25582] |                 |                 | Fix compile after `abseil-cpp` addition in [openwrt/packages#25565][#25565]
 | protobuf | [📥][#25566] |                 |                 | Depends on `abseil-cpp`
 
+[#25582]: https://github.com/openwrt/packages/pull/25582
 [#25566]: https://github.com/openwrt/packages/pull/25566

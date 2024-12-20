@@ -65,8 +65,7 @@ jobs:
           ARCH: "${{ matrix.arch }}-${{ github.ref_name }}"
           FEEDNAME: "meshtastic"
           IGNORE_ERRORS: "n m y"
-          # KEY_BUILD: "${{ secrets.KEY_BUILD }}"
-          # PACKAGES: "meshtasticd meshtasticd-web"
+          KEY_BUILD: "${{ secrets.KEY_BUILD }}"
           INDEX: 1
           # NO_REFRESH_CHECK: 1
           # NO_SHFMT_CHECK: 1

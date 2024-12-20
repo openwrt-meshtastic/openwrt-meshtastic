@@ -6,8 +6,8 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=meshtasticd
 PKG_VERSION:=2.5.17
-PKG_RELEASE:=4
-PKG_SOURCE_VERSION:=69d01a8088d89753cea18502e44777764774d765
+PKG_RELEASE:=5
+PKG_SOURCE_VERSION:=e1de439a7f7c132e469ac2ed32e9b90ad527c3e3
 
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)
 PKG_SOURCE_PROTO:=git
@@ -121,6 +121,7 @@ define Package/meshtasticd/install
 	$(CP) -R $(PKG_BUILD_DIR)/bin/config.d/* $(1)/etc/meshtasticd/available.d
 
 	$(INSTALL_DIR) $(1)/etc/init.d
+	$(INSTALL_DIR) $(1)/usr/share/meshtasticd
 	$(INSTALL_BIN) ./files/meshtasticd.init $(1)/etc/init.d/meshtasticd
 endef
 
