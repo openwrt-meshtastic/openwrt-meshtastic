@@ -6,13 +6,15 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=meshtasticd
 PKG_VERSION:=2.5.17
-PKG_RELEASE:=5
-PKG_SOURCE_VERSION:=e1de439a7f7c132e469ac2ed32e9b90ad527c3e3
+PKG_RELEASE:=6
+# https://github.com/meshtastic/firmware/pull/5474
+PKG_SOURCE_VERSION:=f39a9c5083e061e5919495df3814e058b13bd263
 
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=https://github.com/meshtastic/firmware.git
-PKG_MIRROR_HASH:=skip
+# PKG_MIRROR_HASH:=skip
+PKG_MIRROR_HASH:=97d2983d7636e53ac5ab92164ea5f352e917d03c51a668708c6f262a01debfbf
 PKG_BUILD_DEPENDS:= \
 	python3/host \
 	python-platformio/host \
