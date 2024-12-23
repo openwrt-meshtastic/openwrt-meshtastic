@@ -6,15 +6,13 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=meshtasticd
 PKG_VERSION:=2.5.17
-PKG_RELEASE:=6
-# https://github.com/meshtastic/firmware/pull/5474
-PKG_SOURCE_VERSION:=f39a9c5083e061e5919495df3814e058b13bd263
+PKG_RELEASE:=7
+PKG_SOURCE_VERSION:=80fc0f2bdafe2cca248afec92589bad341143d75
 
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=https://github.com/meshtastic/firmware.git
-# PKG_MIRROR_HASH:=skip
-PKG_MIRROR_HASH:=97d2983d7636e53ac5ab92164ea5f352e917d03c51a668708c6f262a01debfbf
+PKG_MIRROR_HASH:=49bdcd04641d88e037fb589c2a645e1767fdfff0733a9c2a02701c1773611d77
 PKG_BUILD_DEPENDS:= \
 	python3/host \
 	python-platformio/host \
@@ -43,7 +41,7 @@ define Package/meshtasticd/Default
   TITLE:=Meshtastic Daemon
   URL:=http://github.com/meshtastic/firmware
   DEPENDS:= \
-	+libgpiod +libyaml-cpp +zlib +bluez-libs \
+	+libgpiod +libyaml-cpp +zlib +bluez-libs +libpthread \
 	+MESHTASTICD_ENABLE_SPI:kmod-spi-dev +MESHTASTICD_ENABLE_USB:libusb-1.0 \
 	+MESHTASTICD_ENABLE_WEB:libopenssl \
 	+MESHTASTICD_ENABLE_WEB:liborcania +MESHTASTICD_ENABLE_WEB:libyder +MESHTASTICD_ENABLE_WEB:libulfius-gnutls \
