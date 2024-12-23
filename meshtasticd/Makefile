@@ -6,13 +6,13 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=meshtasticd
 PKG_VERSION:=2.5.17
-PKG_RELEASE:=7
-PKG_SOURCE_VERSION:=80fc0f2bdafe2cca248afec92589bad341143d75
+PKG_RELEASE:=8
+PKG_SOURCE_VERSION:=143e1d1a0d0014332b1aa44222329f74a2df2455
 
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=https://github.com/meshtastic/firmware.git
-PKG_MIRROR_HASH:=49bdcd04641d88e037fb589c2a645e1767fdfff0733a9c2a02701c1773611d77
+PKG_MIRROR_HASH:=94d03dd0d7264d768146e6f1702b36151a78d12e61c120a1332d936b33999567
 PKG_BUILD_DEPENDS:= \
 	python3/host \
 	python-platformio/host \
@@ -21,6 +21,7 @@ PKG_BUILD_DEPENDS:= \
 	libyaml-cpp \
 	zlib \
 	bluez \
+	i2c-tools \
 	MESHTASTICD_ENABLE_USB:libusb \
 	MESHTASTICD_ENABLE_WEB:openssl \
 	MESHTASTICD_ENABLE_WEB:liborcania \
@@ -41,7 +42,7 @@ define Package/meshtasticd/Default
   TITLE:=Meshtastic Daemon
   URL:=http://github.com/meshtastic/firmware
   DEPENDS:= \
-	+libgpiod +libyaml-cpp +zlib +bluez-libs +libpthread \
+	+libgpiod +libyaml-cpp +zlib +bluez-libs +libpthread +libi2c \
 	+MESHTASTICD_ENABLE_SPI:kmod-spi-dev +MESHTASTICD_ENABLE_USB:libusb-1.0 \
 	+MESHTASTICD_ENABLE_WEB:libopenssl \
 	+MESHTASTICD_ENABLE_WEB:liborcania +MESHTASTICD_ENABLE_WEB:libyder +MESHTASTICD_ENABLE_WEB:libulfius-gnutls \
@@ -121,7 +122,7 @@ define Package/meshtasticd/install
 	$(CP) -R $(PKG_BUILD_DIR)/bin/config.d/* $(1)/etc/meshtasticd/available.d
 
 	$(INSTALL_DIR) $(1)/etc/init.d
-	$(INSTALL_DIR) $(1)/usr/share/meshtasticd
+	$(INSTALL_DIR) $(1)/var/lib/meshtasticd
 	$(INSTALL_BIN) ./files/meshtasticd.init $(1)/etc/init.d/meshtasticd
 endef
 
