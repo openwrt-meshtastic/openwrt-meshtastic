@@ -21,12 +21,12 @@ We plan to target `master`, `openwrt-24.10` and (later) `openwrt-23.05` for Libr
 ### New Packages
 | Package             | `master`     | `openwrt-24.10` | `openwrt-23.05` | Notes
 | :------------------ | :----------: | :-------------: | :-------------: | :----
-| libyder             | [📥][#25503] |                 |                 |
-| **meshtasticd**     | 🕰️           |                 |                 | Awaiting python-platformio
-| **meshtasticd-web** | 🕰️           |                 |                 |
-| python-platformio   | [📥][#25528] |                 |                 |
-| python-pyelftools   | [✅][#25502] |                 |                 |
-| python-tabulate     | [✅][#25501] |                 |                 | Also used in `python-meshtastic`
+| libyder             | [✅][#25503] | 📑              |                 |
+| **meshtasticd**     | 📑 🕰️        |                 |                 | Pending Beta release with CH341 fixes
+| **meshtasticd-web** | 📑 🕰️        |                 |                 |
+| python-platformio   | [✅][#25528] | 📑              |                 |
+| python-pyelftools   | [✅][#25502] | 📑              |                 |
+| python-tabulate     | [✅][#25501] | 📑              |                 | Also used in `python-meshtastic`
 
 [#25503]: https://github.com/openwrt/packages/pull/25503
 [#25528]: https://github.com/openwrt/packages/pull/25528
@@ -76,10 +76,10 @@ We plan to target `master`, `openwrt-24.10` and (later) `openwrt-23.05` for Libr
 [#25576]: https://github.com/openwrt/packages/pull/25576
 
 ### Modified Packages
-| Package  | `master`     | `openwrt-24.10` | `openwrt-23.05` | Notes
-| :------- | :----------: | :-------------: | :-------------: | :----
-| node     | [📥][#25582] |                 |                 | Fix compile after `abseil-cpp` addition in [openwrt/packages#25565][#25565]
-| protobuf | [📥][#25566] |                 |                 | Depends on `abseil-cpp`
+| Package  | `master`        | `openwrt-24.10` | `openwrt-23.05` | Notes
+| :------- | :-------------: | :-------------: | :-------------: | :----
+| node     | [🕰️ 📥][#25582] |                 |                 | Fix compile after `abseil-cpp` addition in [openwrt/packages#25565][#25565]
+| protobuf | [📥][#25566]    |                 |                 | Depends on `abseil-cpp`
 
 [#25582]: https://github.com/openwrt/packages/pull/25582
 [#25566]: https://github.com/openwrt/packages/pull/25566
