@@ -19,7 +19,6 @@ jobs:
     runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
-      max-parallel: 1
       matrix:
         arch:
           - aarch64_cortex-a53
@@ -37,7 +36,7 @@ jobs:
           - arm_cortex-a9_neon
           - arm_cortex-a9_vfpv3-d16
           - arm_fa526
-          # - arm_mpcore
+          # - arm_mpcore  # Fails to create index?
           - arm_xscale
           - i386_pentium-mmx
           - i386_pentium4
@@ -67,13 +66,33 @@ jobs:
           IGNORE_ERRORS: "n m y"
           KEY_BUILD: "${{ secrets.KEY_BUILD }}"
           INDEX: 1
-          # NO_REFRESH_CHECK: 1
-          # NO_SHFMT_CHECK: 1
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.arch }}
+          path: bin/packages/${{ matrix.arch }}/meshtastic/
+
+  deploy:
+    name: Deploy packages to GitHub Pages
+    runs-on: ubuntu-24.04
+    needs: build
+    concurrency:
+      # Only run one deploy at a time
+      group: publish-builds
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: ${{ github.ref_name }}
 
       - name: Upload packages to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
           external_repository: openwrt-meshtastic/repo
-          publish_dir: bin/packages/${{ matrix.arch }}/meshtastic/
-          destination_dir: ${{ github.ref_name }}/${{ matrix.arch }}
+          publish_dir: ${{ github.ref_name }}
+          destination_dir: ${{ github.ref_name }}
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+          enable_jekyll: true
